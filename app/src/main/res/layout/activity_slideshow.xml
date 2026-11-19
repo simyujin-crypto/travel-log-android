@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitCenter"
-        android:padding="14dp" />
+        android:padding="16dp" />
 
     <VideoView
         android:id="@+id/videoSlide"
@@ -19,27 +19,34 @@
         android:layout_gravity="center"
         android:visibility="gone" />
 
-    <!-- 추억 액자 테두리 -->
+    <!-- 구글 지도 웹뷰 (경로 및 마커 표시용) -->
+    <WebView
+        android:id="@+id/webMapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <!-- 추억 액자 테두리 (터치 통과 설정) -->
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:background="@drawable/memory_frame" />
+        android:background="@drawable/memory_frame"
+        android:clickable="false"
+        android:focusable="false" />
 
-    <!-- 하단 장소명 자막 (장소만 감성 서체로 출력) -->
+    <!-- 하단 장소명 자막 (장소만 감성 서체로 표시) -->
     <TextView
         android:id="@+id/tvPlaceCaption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="92dp"
+        android:background="#88000000"
         android:gravity="center"
-        android:padding="12dp"
-        android:shadowColor="#000000"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="6"
-        android:textColor="#FFFFFF"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp"
+        android:textColor="#FFF8E7"
         android:textSize="22sp" />
 
     <!-- 엔딩 크레딧 오버레이 -->
@@ -47,7 +54,7 @@
         android:id="@+id/tvEndingOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#AA000000"
+        android:background="#BB000000"
         android:gravity="center"
         android:lineSpacingExtra="10dp"
         android:padding="28dp"
@@ -55,14 +62,30 @@
         android:textSize="18sp"
         android:visibility="gone" />
 
-    <Button
-        android:id="@+id/btnSaveMp4"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="44dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="20dp"
-        android:backgroundTint="#7F1D1D"
-        android:text="MP4 영상 저장"
-        android:textColor="#FFFFFF"
-        android:textSize="13sp" />
+        android:layout_margin="18dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnToggleMap"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#1E293B"
+            android:text="구글지도 보기"
+            android:textColor="#D4AF37"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnSaveMp4"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:backgroundTint="#7F1D1D"
+            android:text="MP4 영상 저장"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
+    </LinearLayout>
 </FrameLayout>

@@ -104,20 +104,37 @@
         <Button
             android:id="@+id/btnSelectCover"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="50dp"
             android:text="1. 대표 표지 이미지 선택"
             android:backgroundTint="#334155"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="10dp" />
 
         <Button
-            android:id="@+id/btnSelectMedia"
+            android:id="@+id/btnSelectBgm"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:text="2. 여행 사진 및 영상 다중 선택"
+            android:layout_height="50dp"
+            android:text="2. 배경음악 (BGM) 선택"
             android:backgroundTint="#334155"
             android:textColor="#FFFFFF"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/tvBgmStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="선택된 배경음악: 없음"
+            android:textColor="#94A3B8"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnSelectMedia"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="3. 여행 사진 및 영상 다중 선택"
+            android:backgroundTint="#334155"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="6dp" />
 
         <TextView
             android:id="@+id/tvStatus"
@@ -131,7 +148,7 @@
             android:id="@+id/btnStartSlideshow"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="3. 경로 분석 및 슬라이드쇼 시작"
+            android:text="4. 경로 분석 및 슬라이드쇼 시작"
             android:backgroundTint="#D4AF37"
             android:textColor="#000000"
             android:textStyle="bold" />
