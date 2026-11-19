@@ -17,15 +17,25 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private var coverUri: Uri? = null
+    private var bgmUri: Uri? = null
     private var selectedMediaUris: List<Uri> = emptyList()
 
     private lateinit var tvStatus: TextView
+    private lateinit var tvBgmStatus: TextView
 
     private val pickCoverLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             if (uri != null) {
                 coverUri = uri
                 Toast.makeText(this, "대표 표지 이미지가 선택되었습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    private val pickBgmLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            if (uri != null) {
+                bgmUri = uri
+                tvBgmStatus.text = "선택된 배경음악: ${uri.lastPathSegment ?: "오디오 파일"}"
             }
         }
 
@@ -48,12 +58,17 @@ class MainActivity : AppCompatActivity() {
         val etDeparture = findViewById<EditText>(R.id.etDeparture)
         val etLodging = findViewById<EditText>(R.id.etLodging)
         tvStatus = findViewById(R.id.tvStatus)
+        tvBgmStatus = findViewById(R.id.tvBgmStatus)
 
         val schedules = arrayOf("당일", "1박", "2박", "3박", "4박")
         spSchedule.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, schedules)
 
         findViewById<Button>(R.id.btnSelectCover).setOnClickListener {
             pickCoverLauncher.launch("image/*")
+        }
+
+        findViewById<Button>(R.id.btnSelectBgm).setOnClickListener {
+            pickBgmLauncher.launch("audio/*")
         }
 
         findViewById<Button>(R.id.btnSelectMedia).setOnClickListener {
@@ -66,6 +81,7 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            val tripTitle = etTitle.text.toString().ifBlank { "나의 여행" }
             tvStatus.text = "사진 위치(GPS) 및 경로 분석 중..."
             val apiKey = "AIzaSyCm6JNhKc5ghV8qSTIzrrf5FYjlHqoa6jo"
 
@@ -73,17 +89,19 @@ class MainActivity : AppCompatActivity() {
                 val parsedItems = ExifAndMapHelper.parseMediaList(
                     this@MainActivity,
                     selectedMediaUris,
-                    apiKey
+                    apiKey,
+                    tripTitle
                 )
 
                 val config = TripConfig(
-                    title = etTitle.text.toString().ifBlank { "나의 여행" },
+                    title = tripTitle,
                     dateText = etDate.text.toString(),
                     companions = etCompanions.text.toString(),
                     scheduleType = spSchedule.selectedItem.toString(),
                     departure = etDeparture.text.toString(),
                     lodging = etLodging.text.toString(),
                     coverUriString = coverUri?.toString(),
+                    bgmUriString = bgmUri?.toString(),
                     apiKey = apiKey,
                     items = ArrayList(parsedItems)
                 )

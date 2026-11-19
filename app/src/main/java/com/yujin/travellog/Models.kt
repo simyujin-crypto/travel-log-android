@@ -20,6 +20,7 @@ data class TripConfig(
     val departure: String = "메가커피수원대점 오전10시",
     val lodging: String = "없음",
     val coverUriString: String? = null,
+    val bgmUriString: String? = null,
     val apiKey: String = "AIzaSyCm6JNhKc5ghV8qSTIzrrf5FYjlHqoa6jo",
     val items: ArrayList<MediaItem> = arrayListOf()
 ) : Serializable {
